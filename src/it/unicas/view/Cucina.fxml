@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXLabel?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancorpaneAdmin" prefHeight="500.0" prefWidth="720.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.CucinaOverviewController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+            <Pane prefHeight="92.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34 #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXLabel layoutX="310.0" layoutY="65.0" lineStrokeWidth="0.0" text="Cucina">
+                     <textFill>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </textFill>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </MFXLabel>
+               </children>
+            </Pane>
+            </top>
+         <center>
+            <MFXLegacyTableView fx:id="cucinaTableView" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="Nome" />
+                  <TableColumn fx:id="quantitaColumn" prefWidth="75.0" text="Quantità" />
+                  <TableColumn fx:id="numeroTavoloColumn" prefWidth="75.0" text="N° Tavolo" />
+                  <TableColumn fx:id="locazioneTavoloColumn" prefWidth="75.0" text="Locazione" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </MFXLegacyTableView>
+         </center>
+         <bottom>
+            <Pane prefHeight="42.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34 #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXButton fx:id="preparatoButton" buttonType="RAISED" disable="true" layoutX="629.0" layoutY="6.0" onAction="#preparatoButtonPressed" text="Preparato">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </MFXButton>
+               </children>
+            </Pane>
+         </bottom>
+        </BorderPane>
+    </children>
+
+</AnchorPane>

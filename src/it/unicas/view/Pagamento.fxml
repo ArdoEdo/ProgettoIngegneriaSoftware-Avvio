@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXLabel?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.PagamentoOverviewController">
+   <children>
+      <Pane prefHeight="67.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34;">
+         <children>
+            <MFXLabel layoutX="287.0" layoutY="16.0" lineColor="#eb9600" lineStrokeWidth="3.0" prefHeight="46.0" prefWidth="142.0" text="Pagamento">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <textFill>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </textFill>
+            </MFXLabel>
+         </children>
+      </Pane>
+      <MFXButton alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="551.0" layoutY="322.0" onAction="#pagamentoCartaPressed" prefHeight="46.0" prefWidth="155.0" text="Paga con carta">
+         <graphic>
+            <FontAwesomeIconView glyphName="PAYPAL" size="25">
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </FontAwesomeIconView>
+         </graphic>
+      </MFXButton>
+      <MFXButton alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="385.0" layoutY="322.0" onAction="#pagamentoContantiPressed" prefHeight="46.0" prefWidth="145.0" text="Paga in contanti">
+         <graphic>
+            <FontAwesomeIconView glyphName="MONEY" size="25">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </FontAwesomeIconView>
+         </graphic>
+      </MFXButton>
+      <MFXLabel layoutX="154.0" layoutY="88.0" lineStrokeWidth="0.0" text="Riepilogo Ordine">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </MFXLabel>
+      <MFXLegacyTableView fx:id="pagamentoTableView" layoutX="46.0" layoutY="115.0" prefHeight="255.0" prefWidth="321.0">
+         <columns>
+            <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="Nome" />
+            <TableColumn fx:id="quantitaColumn" prefWidth="75.0" text="Quantità" />
+            <TableColumn fx:id="prezzoColumn" prefWidth="75.0" text="Prezzo" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </MFXLegacyTableView>
+      <MFXLabel layoutX="507.0" layoutY="248.0" lineStrokeWidth="0.0" text="Totale">
+         <textFill>
+            <Color />
+         </textFill>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </MFXLabel>
+      <MFXTextField fx:id="totaleTextField" alignment="CENTER" editable="false" layoutX="457.0" layoutY="275.0" lineStrokeWidth="3.0" promptText="Totale da pagare" unfocusedLineColor="#eb9600">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </MFXTextField>
+      <FontAwesomeIconView glyphName="EURO" layoutX="437.0" layoutY="301.0" size="25" />
+   </children>
+</AnchorPane>

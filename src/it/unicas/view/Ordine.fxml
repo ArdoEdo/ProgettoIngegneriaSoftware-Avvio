@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXLabel?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="720.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.OrdineOverviewController">
+    <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <SplitPane dividerPositions="0.35724233983286907">
+               <items>
+                  <AnchorPane>
+                     <children>
+                              <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <MFXLegacyTableView fx:id="ordineTableView" editable="true" BorderPane.alignment="CENTER">
+                                 <columns>
+                                    <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="Nome" />
+                                    <TableColumn fx:id="prezzoColumn" prefWidth="75.0" text="Prezzo" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </MFXLegacyTableView>
+                           </center>
+                           <bottom>
+                              <MFXButton fx:id="caricaButton" buttonType="RAISED" onAction="#caricaMenu" text="Carica Menu" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </MFXButton>
+                           </bottom>
+                              </BorderPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                              <BorderPane layoutX="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                  <left>
+                                      <GridPane prefHeight="310.0" prefWidth="83.0" BorderPane.alignment="CENTER">
+                                          <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          </columnConstraints>
+                                          <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          </rowConstraints>
+                                          <children>
+                                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                  <children>
+                                          <MFXButton fx:id="aggiungiButton" buttonType="RAISED" graphicTextGap="2.0" layoutY="79.0" onAction="#aggiungiButtonPressed" prefHeight="33.0" prefWidth="83.0" text="Aggiungi" wrapText="true" AnchorPane.bottomAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView glyphName="ANGLE_DOUBLE_RIGHT" size="24" />
+                                             </graphic>
+                                          </MFXButton>
+                                                  </children>
+                                              </AnchorPane>
+                                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <MFXButton fx:id="rimuoviButton" buttonType="RAISED" graphicTextGap="2.0" onAction="#rimuoviButtonPressed" prefHeight="33.0" prefWidth="83.0" text="Rimuovi">
+                                             <graphic>
+                                                <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="24" />
+                                             </graphic>
+                                          </MFXButton>
+                                       </children>
+                                              </AnchorPane>
+                                          </children>
+                                      </GridPane>
+                                  </left>
+                           <center>
+                              <MFXLegacyTableView fx:id="riepilogoOrdine" BorderPane.alignment="CENTER">
+                                 <columns>
+                                    <TableColumn fx:id="dxNomeColumn" prefWidth="75.0" text="Nome" />
+                                    <TableColumn fx:id="quantitaColumn" prefWidth="75.0" text="Quantita" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </MFXLegacyTableView>
+                           </center>
+                           <bottom>
+                              <Pane prefHeight="40.0" prefWidth="314.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <MFXLegacyComboBox fx:id="comboBoxLocazione" layoutX="98.0" layoutY="7.0" onAction="#locazioneSelected" promptText="Locazione" />
+                                    <MFXLegacyComboBox fx:id="comboBoxTavolo" disable="true" layoutX="208.0" layoutY="7.0" onAction="#tavoloSelected" promptText="N° Tavolo" />
+                                    <MFXButton fx:id="ordinaButton" buttonType="RAISED" disable="true" layoutX="311.0" layoutY="7.0" onAction="#inviaOrdine" prefHeight="26.0" prefWidth="80.0" text="Ordina" />
+                                 </children>
+                              </Pane>
+                           </bottom>
+                              </BorderPane>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+         </center>
+         <top>
+            <Pane prefHeight="92.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXLabel layoutX="310.0" layoutY="65.0" lineColor="#ffa435" lineStrokeWidth="0.0" text="Ordini">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <textFill>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </textFill>
+                  </MFXLabel>
+               </children></Pane>
+         </top>
+      </BorderPane>
+    </children>
+</AnchorPane>

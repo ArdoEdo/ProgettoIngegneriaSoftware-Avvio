@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXLabel?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.CassaOverviewController">
+    <children>
+        <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <left>
+                <GridPane alignment="CENTER" prefHeight="337.0" prefWidth="164.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <children>
+                        <MFXLegacyComboBox fx:id="comboBox" layoutX="7.0" layoutY="16.0" prefHeight="24.0" prefWidth="150.0" promptText="Locazione" />
+                        <MFXTextField fx:id="inserisciTavolo" layoutX="10.0" layoutY="68.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                            <children>
+                        <MFXButton fx:id="trovaTavoloButton" buttonType="RAISED" layoutX="22.0" layoutY="19.0" onAction="#trovaTavoloButtonPressed" prefHeight="26.0" prefWidth="121.0" text="Visualizza Ordini" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </GridPane>
+            </left>
+         <bottom>
+            <AnchorPane prefHeight="40.0" prefWidth="720.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="469.0" layoutY="7.0" prefHeight="40.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <MFXButton fx:id="pagamentoButton" alignment="CENTER" buttonType="RAISED" layoutX="591.0" layoutY="2.0" onAction="#pagamentoButtonPressed" prefHeight="26.0" prefWidth="125.0" text="Pagamento">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </MFXButton>
+                  <FontAwesomeIconView glyphName="EURO" layoutX="434.0" layoutY="26.0" size="22" />
+                  <MFXTextField fx:id="totaleTextField" alignment="CENTER" editable="false" layoutX="435.0" layoutY="4.0" promptText="Prezzo" />
+               </children>
+            </AnchorPane>
+         </bottom>
+         <top>
+            <Pane prefHeight="92.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXLabel layoutX="310.0" layoutY="65.0" lineStrokeWidth="0.0" text="Cassa">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <textFill>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </textFill>
+                  </MFXLabel>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <MFXLegacyTableView fx:id="cassaTableView" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="Nome" />
+                  <TableColumn fx:id="quantitaColumn" prefWidth="75.0" text="Quantità" />
+                  <TableColumn fx:id="prezzoColumn" prefWidth="75.0" text="Prezzo" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </MFXLegacyTableView>
+         </center>
+        </BorderPane>
+    </children>
+
+
+</AnchorPane>

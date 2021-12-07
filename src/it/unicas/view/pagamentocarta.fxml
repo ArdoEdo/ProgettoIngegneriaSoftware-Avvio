@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXLabel?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane prefHeight="157.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.PagamentoOverviewController">
+   <content>
+      <StackPane>
+         <children>
+            <BorderPane>
+               <bottom>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <MFXButton fx:id="confermaPagamento" defaultButton="true" prefHeight="30.0" prefWidth="165.0" text="Conferma" GridPane.rowIndex="1" />
+                        <MFXButton fx:id="annullaPagamento" prefHeight="30.0" prefWidth="172.0" text="Annulla" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </bottom>
+               <center>
+                  <MFXPasswordField lineStrokeWidth="0.5" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </MFXPasswordField>
+               </center>
+               <top>
+                  <MFXLabel lineStrokeWidth="0.0" text="Inserire il pin della carta" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </MFXLabel>
+               </top>
+            </BorderPane>
+            <MFXProgressSpinner fx:id="spinnerPagamento" disable="true" opacity="0.0" />
+         </children>
+      </StackPane>
+   </content>
+</DialogPane>
