@@ -32,8 +32,8 @@ public class AdminOverviewController {
         String userName = UserName.getText();
         String passWord = PassWord.getText();
 
-        Alert mes = new Alert(Alert.AlertType.INFORMATION);
-        if(userName.equals("admin") && passWord.equals("admin1234")){
+        //Alert mes = new Alert(Alert.AlertType.INFORMATION);
+        /*if(userName.equals("a") && passWord.equals("a")){
             mes.setContentText("Benveuto " + userName);
             mes.setTitle("WELCOME");
             mes.show();
@@ -46,8 +46,8 @@ public class AdminOverviewController {
             mes.setTitle("Errore");
             mes.show();
 
-        }
-
+        }*/
+        mainApp.showAdminOverview2();
 
     }
 

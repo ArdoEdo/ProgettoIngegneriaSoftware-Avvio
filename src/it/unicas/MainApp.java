@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -31,6 +32,24 @@ public class MainApp extends Application {
     private ObservableList<Tavolo> tavoloData= FXCollections.observableArrayList();
     private ObservableList<Ordine> ordineData = FXCollections.observableArrayList();
     private ObservableList<ProdottiOrdinati> prodottiOrdinatiData = FXCollections.observableArrayList();
+    private Integer modalitaRestrizioni=0; //gestisce  la presenza di alcolici nel menu ordinabile
+    private Integer modalitaEstiva=0;    //gestisce la presenza di tavoli esterni dal locale
+
+    public Integer getModalitaRestrizioni() {
+        return modalitaRestrizioni;
+    }
+
+    public void setModalitaRestrizioni(Integer modalitaRestrizioni) {
+        this.modalitaRestrizioni = modalitaRestrizioni;
+    }
+
+    public Integer getModalitaEstiva() {
+        return modalitaEstiva;
+    }
+
+    public void setModalitaEstiva(Integer modalitaEstiva) {
+        this.modalitaEstiva = modalitaEstiva;
+    }
 
     /**
      * Costruttore
@@ -49,6 +68,7 @@ public class MainApp extends Application {
         initRootLayout();
         showOrdineOverview();
 
+        this.primaryStage.setResizable(false);
         this.primaryStage.show();
 
     }
@@ -173,7 +193,7 @@ public class MainApp extends Application {
     public void showAdminOverview() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/Admin.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/AdminOverview.fxml"));
             rootLayout.setCenter(loader.load());
 
             // Get controller and set the mainapp reference.
@@ -189,7 +209,7 @@ public class MainApp extends Application {
     public void showAdminOverview2() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/AdminShowAdmin2.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/AdminOverview2Test.fxml"));
             rootLayout.setCenter( loader.load());
 
             // Get controller and set the mainapp reference.
@@ -228,8 +248,14 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-
+    public void checkRestriction() {
+        if(LocalDateTime.now().getMonth().ordinal()>= 5 && LocalDateTime.now().getMonth().ordinal()<=8){
+            setModalitaEstiva(1);} //inserire tavoli all'esterno
+        if(getModalitaEstiva()==1 && (LocalDateTime.now().getHour()>=22 || LocalDateTime.now().getHour()<=6)) {
+            setModalitaRestrizioni(1); //eliminare alcolici dal menu
+        }
     }
 
     public Stage getPrimaryStage() {

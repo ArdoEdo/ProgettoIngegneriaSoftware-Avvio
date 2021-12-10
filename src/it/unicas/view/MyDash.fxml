@@ -3,8 +3,8 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXLabel?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +21,7 @@
          <children>
             <Pane prefHeight="97.0" prefWidth="180.0" style="-fx-background-color: #2d2e34;">
                <children>
-                  <MFXLabel graphicTextGap="3.0" layoutX="-1.0" layoutY="62.0" lineColor="WHITE" lineStrokeWidth="5.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="177.0" stylesheets="@DarkTheme_1.css" text="Pub" unfocusedLineColor="#ffa435">
+                  <MFXLabel alignment="TOP_LEFT" graphicTextGap="3.0" layoutX="-1.0" layoutY="58.0" lineColor="WHITE" lineStrokeWidth="5.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="300.0" stylesheets="@DarkTheme_1.css" text="Pub" unfocusedLineColor="#ffa435">
                      <textFill>
                         <Color red="1.0" green="1.0" blue="1.0" opacity="0.8976545929908752" />
                      </textFill>
@@ -32,7 +32,7 @@
                         <Insets left="90.0" />
                      </padding>
                   </MFXLabel>
-                  <ImageView fx:id="imageBeer" fitHeight="86.0" fitWidth="84.0" layoutX="12.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBeer" fitHeight="86.0" fitWidth="84.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../resources/beer.png" />
                      </image></ImageView>
@@ -40,7 +40,7 @@
             </Pane>
             <AnchorPane prefHeight="360.0" prefWidth="180.0">
                <children>
-                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="50.0" onAction="#handleShowBar" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Bar" textFill="WHITE">
+                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="53.0" onAction="#handleShowBar" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Bar" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="GLASS" size="18" />
                      </graphic>
@@ -51,7 +51,7 @@
                         <Font name="Comfortaa SemiBold" size="14.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#handleShowOrdine" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Ordine" textFill="WHITE">
+                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="3.0" onAction="#handleShowOrdine" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Ordine" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="18" />
                      </graphic>
@@ -62,7 +62,7 @@
                         <Font name="Comfortaa SemiBold" size="14.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="100.0" onAction="#handleShowCucina" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Cucina" textFill="WHITE">
+                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="103.0" onAction="#handleShowCucina" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Cucina" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="CUTLERY" size="18" />
                      </graphic>
@@ -73,7 +73,7 @@
                         <Font name="Comfortaa SemiBold" size="14.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" onAction="#handleShowCassa" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Cassa" textFill="WHITE">
+                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="153.0" onAction="#handleShowCassa" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Cassa" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="EURO" size="18" />
                      </graphic>
@@ -84,7 +84,7 @@
                         <Font name="Comfortaa SemiBold" size="14.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="200.0" onAction="#handleShowAdmin" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Admin" textFill="WHITE">
+                  <MFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="203.0" onAction="#handleShowAdmin" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52;" styleClass="sidebarItem" text="Admin" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="18" />
                      </graphic>
@@ -95,10 +95,14 @@
                         <Font name="Comfortaa SemiBold" size="14.0" />
                      </font>
                   </MFXButton>
-                  <MFXTextField fx:id="mioLabel" alignment="CENTER" animateLines="false" editable="false" layoutX="18.0" layoutY="327.0" lineStrokeWidth="0.0" text="ORA LOCALE" unfocusedLineColor="WHITE" />
+                  <Label fx:id="oraCorrenteText" layoutX="67.0" layoutY="326.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <MFXButton accessibleHelp="Bevande alcoliche" accessibleRoleDescription="dsadsa" accessibleText="dsadas" disable="true" graphicTextGap="10.0" prefHeight="57.0" prefWidth="180.0" rippleAnimateShadow="true" style="-fx-background-color: #323d52#323d52 #323d52#323d52 #323d52#323d52 #323d52#323d52;" text="Restrizioni attive" textFill="WHITE">
+            <MFXButton fx:id="restrictionWarning" accessibleHelp="Bevande alcoliche" accessibleRoleDescription="dsadsa" accessibleText="dsadas" graphicTextGap="10.0" opacity="0.3" prefHeight="57.0" prefWidth="180.0" rippleAnimateShadow="true" style="-fx-background-color: #323d52#323d52 #323d52#323d52 #323d52#323d52 #323d52#323d52;" text="Restrizioni attive" textFill="WHITE">
                <graphic>
                   <StackPane>
                      <children>
@@ -107,7 +111,7 @@
                               <Font size="1.0" />
                            </font>
                         </FontAwesomeIconView>
-                        <FontAwesomeIconView fill="RED" glyphName="BAN" size="48" />
+                        <FontAwesomeIconView fx:id="warningIcon" fill="RED" glyphName="BAN" size="48" />
                      </children>
                   </StackPane>
                </graphic>

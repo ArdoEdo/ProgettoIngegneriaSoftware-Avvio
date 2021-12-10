@@ -61,14 +61,14 @@
             </AnchorPane>
          </bottom>
          <top>
-            <Pane prefHeight="92.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="92.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXLabel layoutX="310.0" layoutY="65.0" lineStrokeWidth="0.0" text="Cassa">
+                  <MFXLabel layoutX="-1.0" layoutY="58.0" lineStrokeWidth="0.0" text="Cassa">
                      <font>
                         <Font size="24.0" />
                      </font>
                      <textFill>
-                        <Color red="1.0" green="1.0" blue="1.0" />
+                        <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
                      </textFill>
                   </MFXLabel>
                </children>

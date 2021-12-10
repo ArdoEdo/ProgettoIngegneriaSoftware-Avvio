@@ -37,14 +37,14 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <BorderPane.margin>
-                                    <Insets />
+                                    <Insets bottom="12.0" />
                                  </BorderPane.margin>
                               </MFXLegacyTableView>
                            </center>
                            <bottom>
                               <MFXButton fx:id="caricaButton" buttonType="RAISED" onAction="#caricaMenu" text="Carica Menu" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
-                                    <Insets />
+                                    <Insets bottom="3.0" />
                                  </BorderPane.margin>
                               </MFXButton>
                            </bottom>
@@ -117,14 +117,14 @@
             </SplitPane>
          </center>
          <top>
-            <Pane prefHeight="92.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="92.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXLabel layoutX="310.0" layoutY="65.0" lineColor="#ffa435" lineStrokeWidth="0.0" text="Ordini">
+                  <MFXLabel layoutX="-1.0" layoutY="58.0" lineColor="#ffa435" lineStrokeWidth="0.0" text="Ordine">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                      <textFill>
-                        <Color red="1.0" green="1.0" blue="1.0" />
+                        <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
                      </textFill>
                   </MFXLabel>
                </children></Pane>

@@ -16,11 +16,11 @@
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
-            <Pane prefHeight="92.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34 #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="92.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXLabel layoutX="310.0" layoutY="65.0" lineStrokeWidth="0.0" text="Cucina">
+                  <MFXLabel layoutX="-1.0" layoutY="58.0" lineStrokeWidth="0.0" text="Cucina">
                      <textFill>
-                        <Color red="1.0" green="1.0" blue="1.0" />
+                        <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
                      </textFill>
                      <font>
                         <Font size="24.0" />
@@ -49,7 +49,7 @@
             </MFXLegacyTableView>
          </center>
          <bottom>
-            <Pane prefHeight="42.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34 #2d2e34#2d2e34;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="42.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
                   <MFXButton fx:id="preparatoButton" buttonType="RAISED" disable="true" layoutX="629.0" layoutY="6.0" onAction="#preparatoButtonPressed" text="Preparato">
                      <font>

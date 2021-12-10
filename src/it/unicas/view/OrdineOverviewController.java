@@ -62,14 +62,8 @@ public OrdineOverviewController(){
     private void initialize(){
 
 
-    //inizializzo il comboBox menu
-        comboBoxLocazione.getItems().clear();
-        comboBoxLocazione.getItems().addAll("Bancone","Interno","Esterno");
-
-
         ordineTableView.setPlaceholder(new Label("Caricare il menu"));
         riepilogoOrdine.setPlaceholder(new Label("I prodotti aggiunti verranno visualizzati qui"));
-
 
         //inizializzo la tabella ordineTableView con la colonna nomecolumn
         nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nome_prodottoProperty());
@@ -89,15 +83,23 @@ public OrdineOverviewController(){
         // sull'observableList prodottoData
         ordineTableView.setItems(mainApp.getProdottoData());
 
-
-
+        //inizializzo il comboBox menu
+        comboBoxLocazione.getItems().clear();
+        mainApp.checkRestriction();
+        if(mainApp.getModalitaEstiva()==1)
+            comboBoxLocazione.getItems().addAll("Bancone","Interno","Esterno");
+        else
+            comboBoxLocazione.getItems().addAll("Bancone","Interno");
 }
 
 
 @FXML
 private void caricaMenu() {
+
     Prodotto tempProdotto = new Prodotto(null, "", "", 0, .0f,1);
-//(Integer id_prodotto,String nome_prodotto, String tipo_prodotto,Integer alcolico, Float prezzo_prodotto, Integer quantita_prodotto)
+    //(Integer id_prodotto,String nome_prodotto, String tipo_prodotto,Integer alcolico, Float prezzo_prodotto, Integer quantita_prodotto)
+    mainApp.checkRestriction();
+    tempProdotto.setAlcolico(mainApp.getModalitaRestrizioni());
     caricaButton.setDisable(true);
     List<Prodotto> list = null;
     try {
@@ -115,6 +117,7 @@ private void caricaMenu() {
     @FXML
     private void aggiungiButtonPressed() {
 
+
         int selected_index = ordineTableView.getSelectionModel().getSelectedIndex();
 
 
@@ -124,11 +127,6 @@ private void caricaMenu() {
 
             if(riepilogoOrdine.getItems().size()>0 && comboBoxTavolo.getValue()!=null)
                 ordinaButton.setDisable(false);
-
-            /*  CONTROLLO PRESENZA DI PRODOTTI UGUALI
-            FUNZIONANTE PERCHE' TOGLIE I DOPPIONI DALLA LISTA CORRETTAMENTE
-            MANCANTE: MEDOTO INCREMENTO VALORE QUANTITA*/
-
 
             int sizeRiepilogoOrdine = riepilogoOrdine.getItems().size();
             System.out.println(riepilogoOrdine.getItems().get(sizeRiepilogoOrdine - 1).getNome_prodotto());
@@ -167,6 +165,7 @@ private void caricaMenu() {
 
         List<Tavolo> list = null;
         Tavolo tavolo = new Tavolo(null, 0, comboBoxLocazione.getValue().toString());
+
         try {
             System.out.println(mainApp);
             list = TavoloDAOMySQLImpl.getInstance().select(tavolo);
@@ -199,25 +198,13 @@ private void caricaMenu() {
 
     @FXML
     private void inviaOrdine() {
-        /*if (comboBoxLocazione.getSelectionModel().toString() == "Interno"
-                && Integer.parseInt(comboBoxTavolo.getSelectionModel().toString()) > 0 &&
-                Integer.parseInt(comboBoxTavolo.getSelectionModel().toString()) < 15) {
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Ordine Errato");
-            alert.setHeaderText("Errore invio ordine");
-            alert.setContentText("Per favore scegliere un tavolo disponibile");
 
-            alert.showAndWait();
-        }*/
-        //List <Ordine> tempListOrdine= new ArrayList<Ordine>();
         Ordine tempListOrdine = new Ordine();
         for (int i = 0; i < riepilogoOrdine.getItems().size(); i++) {
                 System.out.println(Integer.parseInt(comboBoxTavolo.getValue().toString()));
                 tempListOrdine.setTavolo_numero_tavolo(Integer.parseInt(comboBoxTavolo.getValue().toString()));
                 tempListOrdine.setTavolo_locazione_tavolo(comboBoxLocazione.getValue().toString());
-                Iterator<Prodotto> iter = mainApp.getProdottoData().iterator();
+
                 for(int j = 0; j<mainApp.getProdottoData().size();j++){
                     if(mainApp.getProdottoData().get(j).getNome_prodotto() == riepilogoOrdine.getItems().get(i).getNome_prodotto()) {
                         tempListOrdine.setProdotto_id_prodotto(mainApp.getProdottoData().get(j).getId_prodotto());
@@ -250,9 +237,5 @@ private void caricaMenu() {
         ordinaButton.setDisable(true);
 
     }
-
-
-
-
 
 }

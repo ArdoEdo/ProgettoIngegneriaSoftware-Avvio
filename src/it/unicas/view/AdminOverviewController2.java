@@ -1,11 +1,8 @@
 package it.unicas.view;
 import it.unicas.MainApp;
-import it.unicas.model.ProdottiOrdinati;
 import it.unicas.model.Prodotto;
 import it.unicas.model.Tavolo;
 import it.unicas.model.dao.DAOException;
-import it.unicas.model.dao.mysql.OrdineDAOMySQLImpl;
-import it.unicas.model.dao.mysql.ProdottiOrdinatiDAOMySQLImpl;
 import it.unicas.model.dao.mysql.ProdottoDAOMySQLImpl;
 import it.unicas.model.dao.mysql.TavoloDAOMySQLImpl;
 import javafx.fxml.FXML;
@@ -29,7 +26,7 @@ public class AdminOverviewController2 {
     @FXML
     private CheckBox alcolico;
     @FXML
-    private ComboBox comboBoxTavolo;
+    private Spinner<Integer> spinnerTavolo;
     @FXML
     private Button rimuovi_tav;
     @FXML
@@ -71,83 +68,60 @@ public class AdminOverviewController2 {
 
     }
 
-    @FXML
-    private void locazioneSelected() {
-
-        List<Tavolo> list = null;
-        Tavolo tavolo = new Tavolo(null, null, comboBoxLocazione.getValue().toString());
-        try {
-            System.out.println(mainApp);
-            list = TavoloDAOMySQLImpl.getInstance().select(tavolo);
-            mainApp.getTavoloData().clear();
-            mainApp.getTavoloData().addAll(list);
-            System.out.println(comboBoxLocazione.getValue().toString());
-            System.out.println(list);
-            comboBoxTavolo.getItems().clear();
-            for (int i = 0; i < list.size(); i++) {
-                comboBoxTavolo.getItems().add(list.get(i).getNumero_tavolo());
-            }
-
-        } catch (DAOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        comboBoxTavolo.setDisable(false);
-
-    }
 
     @FXML
     private void AddTavolo() throws DAOException, SQLException {
         String LocTav = comboBoxLocazione.getValue().toString();
-        Integer Spin = Integer.parseInt(comboBoxTavolo.getValue().toString());
+        Integer Spin = spinnerTavolo.getValue(); //numero tavoli da inserire
 
+        for(int i=0;i<Spin;i++) {
 
-        Tavolo tempTavolo = new Tavolo(Spin, null, LocTav);
-        try {
-            TavoloDAOMySQLImpl.getInstance().insert(tempTavolo);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Tavolo tempTavolo = new Tavolo(1, null, LocTav);
+
+            try {
+                TavoloDAOMySQLImpl.getInstance().insert(tempTavolo);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
-        locazioneSelected();
+        Alert mes1 = new Alert(Alert.AlertType.INFORMATION);
+        mes1.setContentText("Numero tavoli aggiunti: "+Spin);
+        mes1.setTitle("Operazione eseguita");
+        mes1.show();
     }
 
-    @FXML
-    private void tavoloSelected() {
-
-        rimuovi_tav.setDisable(false);
-
-    }
 
     @FXML
     private void RimTavolo() {
         String LocTav = comboBoxLocazione.getValue().toString();
-        Integer Spin = Integer.parseInt(comboBoxTavolo.getValue().toString());
+        Integer Spin = spinnerTavolo.getValue(); //numero tavoli da eliminare
 
         Tavolo tempTavolo = new Tavolo(Spin, null, LocTav);
 
-        Alert mes = new Alert(Alert.AlertType.INFORMATION);
-        System.out.println(tempTavolo);
+        for(int i=0;i<Spin;i++) {
+            try {
+                TavoloDAOMySQLImpl.getInstance().delete(tempTavolo);
 
-        try {
-            TavoloDAOMySQLImpl.getInstance().delete(tempTavolo);
+            } catch (DAOException e) {
+                e.printStackTrace();
 
-        } catch (DAOException e) {
-            e.printStackTrace();
+            } catch (SQLException e) {
+                Alert mes1 = new Alert(Alert.AlertType.WARNING);
 
-        } catch (SQLException e) {
-            Alert mes1 = new Alert(Alert.AlertType.WARNING);
+                e.printStackTrace();
+                mes1.setContentText("ERRORE! ORDINI IN CORSO PER IL TAVOLO DA ELIMINARE");
+                mes1.setTitle("ERRORE!");
+                mes1.show();
 
-            e.printStackTrace();
-            mes1.setContentText("ERRORE! ORDINI IN CORSO PER IL TAVOLO DA ELIMINARE");
-            mes1.setTitle("ERRORE!");
-            mes1.show();
-
+            }
         }
-        locazioneSelected();
+        Alert mes1 = new Alert(Alert.AlertType.INFORMATION);
+        mes1.setContentText("Numero tavoli rimossi: "+Spin);
+        mes1.setTitle("Successo");
+        mes1.setHeaderText("Operazione completata");
+        mes1.show();
 
     }
 
@@ -227,7 +201,7 @@ public class AdminOverviewController2 {
 
     @FXML
     private void caricaBut() {
-        Prodotto temp = new Prodotto(0, "", "", 1, .0f, 1);
+        Prodotto temp = new Prodotto(0, "", "", 0, .0f, 1);
         List<Prodotto> list = null;
         try {
             System.out.println(mainApp);

@@ -3,7 +3,6 @@ package it.unicas.model.dao.mysql;
 import it.unicas.model.Tavolo;
 import it.unicas.model.dao.DAO;
 import it.unicas.model.dao.DAOException;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,10 +55,7 @@ public class TavoloDAOMySQLImpl implements DAO<Tavolo>{
             System.out.println(sql);
             DAOMySQLSettings.closeStatement(st);
 
-
             return lista;
-
-
     }
 
     @Override
@@ -69,10 +65,20 @@ public class TavoloDAOMySQLImpl implements DAO<Tavolo>{
 
     @Override
     public void insert(Tavolo a) throws DAOException, SQLException {
+        Integer agg_numero_tavolo; //numero tavolo da aggiungere
+
         try {
             Statement st = DAOMySQLSettings.getStatement();
-            String sql = "INSERT INTO tavolo(numero_tavolo, occupato, locazione_tavolo) VALUES ('"
-                    + a.getNumero_tavolo() + "','" + a.isOccupato() + "','"
+            //calcolo numero tavoli presenti
+            String sql="SELECT COUNT(numero_tavolo) AS numero_tavoli FROM DB_pub.tavolo where locazione_tavolo='" +a.getLocazione_tavolo()+"'";
+            ResultSet res=st.executeQuery(sql);
+            res.next();
+
+            //System.out.println(res.getInt("numero_tavoli"));
+            agg_numero_tavolo=res.getInt("numero_tavoli")+1;
+
+            sql = "INSERT INTO tavolo(numero_tavolo, occupato, locazione_tavolo) VALUES ('"
+                    + agg_numero_tavolo + "','" + a.isOccupato() + "','"
                     + a.getLocazione_tavolo() + "')";
             st.executeUpdate(sql);
 
@@ -91,9 +97,17 @@ public class TavoloDAOMySQLImpl implements DAO<Tavolo>{
     @Override
     public void delete(Tavolo a) throws DAOException, SQLException {
 
+        Integer rim_numero_tavolo; //numero tavolo da rimuovere
         Statement st = DAOMySQLSettings.getStatement();
-        String sql = "DELETE FROM tavolo WHERE locazione_tavolo = '"+ a.getLocazione_tavolo()+"' and occupato = '"
-                +a.isOccupato()+"'and numero_tavolo ='"+a.getNumero_tavolo()+"'";
+        String sql="SELECT COUNT(numero_tavolo) AS numero_tavoli FROM DB_pub.tavolo where locazione_tavolo='" +a.getLocazione_tavolo()+"'";
+        ResultSet res=st.executeQuery(sql);
+        res.next();
+
+        rim_numero_tavolo=res.getInt("numero_tavoli");
+        System.out.println("Tavolo rimosso è il numero:" + rim_numero_tavolo);
+
+        sql = "DELETE FROM tavolo WHERE locazione_tavolo = '"+ a.getLocazione_tavolo()+"' and occupato = '"
+                +a.isOccupato()+"'and numero_tavolo ='"+rim_numero_tavolo+"'";
         int n = st.executeUpdate(sql);
 
         System.out.println(sql);
