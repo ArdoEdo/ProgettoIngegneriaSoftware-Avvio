@@ -92,7 +92,6 @@ public OrdineOverviewController(){
             comboBoxLocazione.getItems().addAll("Bancone","Interno");
 }
 
-
 @FXML
 private void caricaMenu() {
 
@@ -109,8 +108,6 @@ private void caricaMenu() {
         mainApp.getProdottoData().addAll(list);
 
     } catch (DAOException e) {
-        e.printStackTrace();
-    } catch (SQLException e) {
         e.printStackTrace();
     }
 }
@@ -180,9 +177,8 @@ private void caricaMenu() {
 
         } catch (DAOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
         comboBoxTavolo.setDisable(false);
 
     }
@@ -215,13 +211,14 @@ private void caricaMenu() {
                 tempListOrdine.setQuantita_prodotto_or(riepilogoOrdine.getItems().get(i).getQuantita_prodotto());
                 tempListOrdine.setOrdine_preparato(0);
                 System.out.println(tempListOrdine);
-                try{
-                    OrdineDAOMySQLImpl.getInstance().insert(tempListOrdine);
-                    mainApp.getOrdineData().add(tempListOrdine);
 
-                }catch (DAOException | SQLException e){
-                    e.printStackTrace();
-                }
+            try {
+                OrdineDAOMySQLImpl.getInstance().insert(tempListOrdine);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
+            mainApp.getOrdineData().add(tempListOrdine);
+
             riepilogoOrdine.getItems().get(i).setQuantita_prodotto(1);
 
         }

@@ -69,6 +69,8 @@ public class MainApp extends Application {
         showOrdineOverview();
 
         this.primaryStage.setResizable(false);
+        this.primaryStage.setWidth(900);
+        this.primaryStage.setHeight(550);
         this.primaryStage.show();
 
     }

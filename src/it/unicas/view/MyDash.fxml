@@ -19,14 +19,14 @@
    <left>
       <VBox prefHeight="500.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52;" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="97.0" prefWidth="180.0" style="-fx-background-color: #2d2e34;">
+            <Pane prefHeight="97.0" prefWidth="180.0" style="-fx-background-color: #323d52#323d52 #323d52#323d52 #323d52#323d52 #323d52#323d52;">
                <children>
-                  <MFXLabel alignment="TOP_LEFT" graphicTextGap="3.0" layoutX="-1.0" layoutY="58.0" lineColor="WHITE" lineStrokeWidth="5.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="300.0" stylesheets="@DarkTheme_1.css" text="Pub" unfocusedLineColor="#ffa435">
+                  <MFXLabel alignment="TOP_LEFT" graphicTextGap="3.0" layoutX="-3.0" layoutY="51.0" lineColor="WHITE" lineStrokeWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="300.0" styleClass="title_label" text="Pub" unfocusedLineColor="#ffa435">
                      <textFill>
                         <Color red="1.0" green="1.0" blue="1.0" opacity="0.8976545929908752" />
                      </textFill>
                      <font>
-                        <Font name="Heiti TC Medium" size="30.0" />
+                        <Font name="Heiti TC Medium" size="43.0" />
                      </font>
                      <padding>
                         <Insets left="90.0" />

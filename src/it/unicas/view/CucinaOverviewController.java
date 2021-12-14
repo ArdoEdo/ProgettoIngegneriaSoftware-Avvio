@@ -5,10 +5,7 @@ import it.unicas.model.ProdottiOrdinati;
 import it.unicas.model.dao.DAOException;
 import it.unicas.model.dao.mysql.ProdottiOrdinatiDAOMySQLImpl;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,6 +31,7 @@ public class CucinaOverviewController {
 
     @FXML
     private void initialize(){
+        cucinaTableView.setPlaceholder(new Label("Non sono stati effettuati ordini"));
 
         nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nome_prodottoProperty());
         quantitaColumn.setCellValueFactory(cellData-> cellData.getValue().quantita_prodotto_orProperty().asObject());
@@ -68,8 +66,6 @@ public class CucinaOverviewController {
 
         } catch (DAOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         if(list.size()>0){
             preparatoButton.setDisable(false);
@@ -86,31 +82,30 @@ public class CucinaOverviewController {
             try {
 
                 ProdottiOrdinatiDAOMySQLImpl.getInstance().update(tempProdottiOrdinati);
-                //System.out.println(list);
 
             } catch (DAOException e) {
                 e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Ordine preparato!");
+            alert.setHeaderText("L'ordine è stato preparato.");
+            alert.setContentText("Preparare l'ordine successivo");
+
+            alert.showAndWait();
             cucinaTableView.getItems().remove(selected_index);
 
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Errore");
+            alert.setHeaderText("Nessun ordine selezionato");
+            alert.setContentText("Selezionare l'ordine e poi premere 'Preparato'");
+            alert.showAndWait();
         }
         if(cucinaTableView.getItems().size()==0)
             cucinaTableView.setDisable(true);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.initOwner(mainApp.getPrimaryStage());
-        alert.setTitle("ORDINE PREPARATO!");
-        alert.setHeaderText("L'ordine è stato preparato.");
-        //alert.setContentText("Ora è possibile effettuare un nuovo ordine");
 
-        alert.showAndWait();
     }
-
-
-
-
-
-
 }

@@ -37,9 +37,9 @@
          </columns>
       </TableView>
 
-      <ComboBox fx:id="comboBoxLocazione" layoutX="71.0" layoutY="294.0"  prefWidth="150.0" promptText="Locazione" />
+      <ComboBox fx:id="comboBoxLocazione" layoutX="71.0" layoutY="294.0"  prefWidth="150.0" promptText="Locazione" onAction="#locazioneSelected" />
       <Button fx:id="carica" layoutX="310.0" layoutY="355.0" mnemonicParsing="false" onAction="#caricaBut" prefHeight="25.0" prefWidth="60.0" text="Carica" />
-      <Button fx:id="agg_tav" layoutX="146.0" layoutY="413.0" mnemonicParsing="false" onAction="#AddTavolo" prefHeight="25.0" prefWidth="115.0" text="Aggiungi Tavolo/i" />
+      <Button fx:id="agg_tav" disable="true" layoutX="146.0" layoutY="413.0" mnemonicParsing="false" onAction="#AddTavolo" prefHeight="25.0" prefWidth="115.0" text="Aggiungi Tavolo/i" />
       <Button fx:id="rimuovi_prod" layoutX="292.0" layoutY="200.0" mnemonicParsing="false" onAction="#rimuoviButtonMenu" prefHeight="25.0" prefWidth="60.0" text="Rimuovi" />
       <Separator layoutX="273.0" layoutY="6.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="19.0" />
       <Text layoutX="522.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotti">
@@ -47,7 +47,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="rimuovi_tav" layoutX="146.0" layoutY="355.0" mnemonicParsing="false" onAction="#RimTavolo" prefHeight="25.0" prefWidth="115.0" text="Rimuovi Tavoli/i" />
+      <Button fx:id="rimuovi_tav" disable="true" layoutX="146.0" layoutY="355.0" mnemonicParsing="false" onAction="#RimTavolo" prefHeight="25.0" prefWidth="115.0" text="Rimuovi Tavolo/i" />
       <fx:define>
          <Integer fx:id="min" fx:value="1"/>
          <Integer fx:id="max" fx:value="10"/>

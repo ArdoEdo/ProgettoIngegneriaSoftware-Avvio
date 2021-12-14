@@ -6,3 +6,10 @@
 .button{
 -fx-background-color:#ffa435;
 }
+
+.split-pane-divider {
+  -fx-padding: 1 ;
+  -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
+  -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+

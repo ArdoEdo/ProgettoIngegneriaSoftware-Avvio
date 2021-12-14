@@ -73,8 +73,6 @@ public class PagamentoOverviewController {
             mainApp.getProdottiOrdinatiData().clear();
         } catch (DAOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -131,8 +129,6 @@ public class PagamentoOverviewController {
                     ProdottiOrdinatiDAOMySQLImpl.getInstance().delete(temp_prodottiOrdinati);
                     mainApp.getProdottiOrdinatiData().clear();
                 } catch (DAOException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
                     e.printStackTrace();
                 }
 

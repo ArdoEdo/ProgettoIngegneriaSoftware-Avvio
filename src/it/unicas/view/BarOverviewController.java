@@ -8,10 +8,7 @@ import it.unicas.model.dao.DAOException;
 import it.unicas.model.dao.mysql.ProdottiOrdinatiDAOMySQLImpl;
 import it.unicas.model.dao.mysql.ProdottoDAOMySQLImpl;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -37,6 +34,7 @@ public class BarOverviewController {
 
     @FXML
     private void initialize(){
+        barTableView.setPlaceholder(new Label("Non sono stati effettuati ordini"));
 
         nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nome_prodottoProperty());
         quantitaColumn.setCellValueFactory(cellData-> cellData.getValue().quantita_prodotto_orProperty().asObject());
@@ -69,8 +67,6 @@ public class BarOverviewController {
 
         } catch (DAOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         if(list.size()>0){
             preparatoButton.setDisable(false);
@@ -85,28 +81,33 @@ public class BarOverviewController {
         if(selected_index != -1) {
             tempProdottiOrdinati.setId_ordine(mainApp.getProdottiOrdinatiData().get(selected_index).getId_ordine());
             try {
-
                 ProdottiOrdinatiDAOMySQLImpl.getInstance().update(tempProdottiOrdinati);
-                //System.out.println(list);
-
             } catch (DAOException e) {
                 e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Ordine Prearato");
+            alert.setHeaderText("L'ordine è stato preparato.");
+            alert.setContentText("Preparare l'ordine successivo");
+            alert.showAndWait();
 
             barTableView.getItems().remove(selected_index);
 
         }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Errore");
+            alert.setHeaderText("Nessun ordine selezionato");
+            alert.setContentText("Selezionare l'ordine e poi premere 'Preparato'");
+            alert.showAndWait();
+
+        }
         if(barTableView.getItems().size()==0)
             barTableView.setDisable(true);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.initOwner(mainApp.getPrimaryStage());
-        alert.setTitle("ORDINE PREPARATO!");
-        alert.setHeaderText("L'ordine è stato preparato.");
-        //alert.setContentText("Ora è possibile effettuare un nuovo ordine");
-
-        alert.showAndWait();
     }
 
 

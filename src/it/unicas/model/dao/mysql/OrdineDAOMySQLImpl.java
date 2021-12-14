@@ -48,25 +48,28 @@ public class OrdineDAOMySQLImpl implements DAO<Ordine> {
      * @throws DAOException
      * @throws SQLException
      */
-    public List<Ordine> select(Ordine a) throws DAOException, SQLException {
+    public List<Ordine> select(Ordine a) throws DAOException {
 
         ArrayList<Ordine> lista = new ArrayList<>();
-        Statement st = DAOMySQLSettings.getStatement();
-        String sql = "SELECT * FROM ordine ";
-        ResultSet rs=st.executeQuery(sql);
+        try {
+            Statement st = DAOMySQLSettings.getStatement();
+            String sql = "SELECT * FROM ordine ";
+            ResultSet rs = st.executeQuery(sql);
 
-        while(rs.next()){
-            lista.add(new Ordine(rs.getInt("id_ordine"),
-                    rs.getInt("tavolo_numero_tavolo"),
-                    rs.getString("tavolo_locazione_tavolo"),
-                    rs.getInt("prodotto_id_prodotto"),
-                    rs.getInt("ordine_preparato"),
-                    rs.getInt("quantita_prodotto_or")));
+            while (rs.next()) {
+                lista.add(new Ordine(rs.getInt("id_ordine"),
+                        rs.getInt("tavolo_numero_tavolo"),
+                        rs.getString("tavolo_locazione_tavolo"),
+                        rs.getInt("prodotto_id_prodotto"),
+                        rs.getInt("ordine_preparato"),
+                        rs.getInt("quantita_prodotto_or")));
 
+            }
+            DAOMySQLSettings.closeStatement(st);
         }
-        DAOMySQLSettings.closeStatement(st);
-
-
+        catch(SQLException sq){
+            throw new DAOException("Errore select(): " + sq.getMessage());
+        }
         return lista;
     }
 
@@ -96,7 +99,7 @@ public class OrdineDAOMySQLImpl implements DAO<Ordine> {
     }
 
     @Override
-    public List<Ordine> join(Ordine a) throws DAOException, SQLException {
+    public List<Ordine> join(Ordine a) throws DAOException {
         return null;
     }
 
@@ -130,11 +133,9 @@ public class OrdineDAOMySQLImpl implements DAO<Ordine> {
             DAOMySQLSettings.closeStatement(st);
 
             logger.info("SQL" + sql);
-        }catch (SQLException e){
-            e.printStackTrace();
+        }catch (SQLException sq){
+            throw new DAOException("Errore insert(): "+ sq.getMessage());
         }
     }
-
-
 
 }

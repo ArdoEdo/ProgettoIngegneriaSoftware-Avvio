@@ -39,21 +39,27 @@ public class TavoloDAOMySQLImpl implements DAO<Tavolo>{
 
 }
 
-    public List<Tavolo> select(Tavolo t) throws SQLException {
+    public List<Tavolo> select(Tavolo t) throws DAOException {
 
 
             ArrayList<Tavolo> lista = new ArrayList<>();
-            Statement st = DAOMySQLSettings.getStatement();
-            String sql = "SELECT * FROM tavolo where locazione_tavolo = '"+ t.getLocazione_tavolo()+"' and occupato = '"
-                    +t.isOccupato()+"'";
-            ResultSet rs=st.executeQuery(sql);
-            while(rs.next()){
-                lista.add(new Tavolo(rs.getInt("numero_tavolo"),
-                        rs.getInt("occupato"),
-                        rs.getString("locazione_tavolo")));
+
+            try {
+                Statement st = DAOMySQLSettings.getStatement();
+                String sql = "SELECT * FROM tavolo where locazione_tavolo = '" + t.getLocazione_tavolo() + "' and occupato = '"
+                        + t.isOccupato() + "'";
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    lista.add(new Tavolo(rs.getInt("numero_tavolo"),
+                            rs.getInt("occupato"),
+                            rs.getString("locazione_tavolo")));
+                }
+                System.out.println(sql);
+                DAOMySQLSettings.closeStatement(st);
             }
-            System.out.println(sql);
-            DAOMySQLSettings.closeStatement(st);
+            catch(SQLException sq){
+                throw new DAOException("Errore select():"+ sq.getMessage());
+            }
 
             return lista;
     }
@@ -64,7 +70,7 @@ public class TavoloDAOMySQLImpl implements DAO<Tavolo>{
     }
 
     @Override
-    public void insert(Tavolo a) throws DAOException, SQLException {
+    public void insert(Tavolo a) throws DAOException {
         Integer agg_numero_tavolo; //numero tavolo da aggiungere
 
         try {
@@ -87,37 +93,40 @@ public class TavoloDAOMySQLImpl implements DAO<Tavolo>{
 
             logger.info("SQL" + sql);
 
-            }catch (SQLException e){
-            e.printStackTrace();
+            }catch (SQLException sq){
+            throw new DAOException("Errore insert(): "+sq.getMessage());
         }
 
 
     }
 
     @Override
-    public void delete(Tavolo a) throws DAOException, SQLException {
+    public void delete(Tavolo a) throws DAOException {
 
         Integer rim_numero_tavolo; //numero tavolo da rimuovere
-        Statement st = DAOMySQLSettings.getStatement();
-        String sql="SELECT COUNT(numero_tavolo) AS numero_tavoli FROM DB_pub.tavolo where locazione_tavolo='" +a.getLocazione_tavolo()+"'";
-        ResultSet res=st.executeQuery(sql);
-        res.next();
+        try {
+            Statement st = DAOMySQLSettings.getStatement();
+            String sql = "SELECT COUNT(numero_tavolo) AS numero_tavoli FROM DB_pub.tavolo where locazione_tavolo='" + a.getLocazione_tavolo() + "'";
+            ResultSet res = st.executeQuery(sql);
+            res.next();
 
-        rim_numero_tavolo=res.getInt("numero_tavoli");
-        System.out.println("Tavolo rimosso è il numero:" + rim_numero_tavolo);
+            rim_numero_tavolo = res.getInt("numero_tavoli");
+            System.out.println("Tavolo rimosso è il numero:" + rim_numero_tavolo);
 
-        sql = "DELETE FROM tavolo WHERE locazione_tavolo = '"+ a.getLocazione_tavolo()+"' and occupato = '"
-                +a.isOccupato()+"'and numero_tavolo ='"+rim_numero_tavolo+"'";
-        int n = st.executeUpdate(sql);
-
-        System.out.println(sql);
-        DAOMySQLSettings.closeStatement(st);
+            sql = "DELETE FROM tavolo WHERE locazione_tavolo = '" + a.getLocazione_tavolo() + "' and occupato = '"
+                    + a.isOccupato() + "'and numero_tavolo ='" + rim_numero_tavolo + "'";
+            int n = st.executeUpdate(sql);
+            DAOMySQLSettings.closeStatement(st);
+        }
+        catch (SQLException sq){
+            throw new DAOException("Errore delete(): "+ sq.getMessage());
+        }
 
 
     }
 
     @Override
-    public List<Tavolo> join(Tavolo a) throws DAOException, SQLException {
+    public List<Tavolo> join(Tavolo a) throws DAOException {
         return null;
     }
 

@@ -28,6 +28,8 @@ public class AdminOverviewController2 {
     @FXML
     private Spinner<Integer> spinnerTavolo;
     @FXML
+    private Button agg_tav;
+    @FXML
     private Button rimuovi_tav;
     @FXML
     private Button rimuovi_prod;
@@ -82,8 +84,6 @@ public class AdminOverviewController2 {
                 TavoloDAOMySQLImpl.getInstance().insert(tempTavolo);
             } catch (DAOException e) {
                 e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
         Alert mes1 = new Alert(Alert.AlertType.INFORMATION);
@@ -95,6 +95,7 @@ public class AdminOverviewController2 {
 
     @FXML
     private void RimTavolo() {
+
         String LocTav = comboBoxLocazione.getValue().toString();
         Integer Spin = spinnerTavolo.getValue(); //numero tavoli da eliminare
 
@@ -105,20 +106,16 @@ public class AdminOverviewController2 {
                 TavoloDAOMySQLImpl.getInstance().delete(tempTavolo);
 
             } catch (DAOException e) {
-                e.printStackTrace();
-
-            } catch (SQLException e) {
-                Alert mes1 = new Alert(Alert.AlertType.WARNING);
-
-                e.printStackTrace();
-                mes1.setContentText("ERRORE! ORDINI IN CORSO PER IL TAVOLO DA ELIMINARE");
-                mes1.setTitle("ERRORE!");
+                Alert mes1 = new Alert(Alert.AlertType.ERROR);
+                mes1.setTitle("Errore");
+                mes1.setHeaderText("Eliminazione tavolo fallita");
+                mes1.setContentText("Errore! Ordini in corso per il tavolo da eliminare");
                 mes1.show();
-
+                e.printStackTrace();
             }
         }
         Alert mes1 = new Alert(Alert.AlertType.INFORMATION);
-        mes1.setContentText("Numero tavoli rimossi: "+Spin);
+        mes1.setContentText("Numero tavoli rimossi: "+ Spin);
         mes1.setTitle("Successo");
         mes1.setHeaderText("Operazione completata");
         mes1.show();
@@ -143,20 +140,25 @@ public class AdminOverviewController2 {
 
             System.out.println(tempProdotto);
             try {
-                System.out.println("TRY");
                 ProdottoDAOMySQLImpl.getInstance().delete(tempProdotto);
-
             } catch (DAOException e) {
-                e.printStackTrace();
+                Alert mes1 = new Alert(Alert.AlertType.ERROR);
+                mes1.setTitle("Errore");
+                mes1.setHeaderText("Eliminazione prodotto fallita");
+                mes1.setContentText("Errore! Ordini in corso per il prodotto da eliminare");
 
-            } catch (SQLException e) {
-
+                mes1.show();
             }
-
         }
         if (prodottiTableView.getItems().size() == 0)
             rimuovi_prod.setDisable(true);
 
+    }
+
+    @FXML
+    private void locazioneSelected(){
+        rimuovi_tav.setDisable(false);
+        agg_tav.setDisable(false);
     }
 
 
@@ -183,10 +185,6 @@ public class AdminOverviewController2 {
 
             } catch (DAOException e) {
                 e.printStackTrace();
-
-            } catch (SQLException e) {
-                Alert mes1 = new Alert(Alert.AlertType.WARNING);
-
             }
         } else {
             mes.setContentText("Completare tutti i campi di 'Aggiungi prodotto'!");
@@ -210,8 +208,6 @@ public class AdminOverviewController2 {
             mainApp.getProdottoData().addAll(list);
 
         } catch (DAOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

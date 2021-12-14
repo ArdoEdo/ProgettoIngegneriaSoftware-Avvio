@@ -1,5 +1,4 @@
 package it.unicas.model.dao.mysql;
-
 import it.unicas.model.Prodotto;
 import it.unicas.model.dao.DAO;
 import it.unicas.model.dao.DAOException;
@@ -26,43 +25,42 @@ public class ProdottoDAOMySQLImpl implements DAO<Prodotto> {
         return dao;
     }
 
-    public static void main(String args[]) throws DAOException, SQLException {
-
-
-
+    public static void main(String args[]) throws DAOException {
 
     }
 
     @Override
-    public List<Prodotto> select(Prodotto a) throws DAOException, SQLException {
+    public List<Prodotto> select(Prodotto a) throws DAOException {
+
         ArrayList<Prodotto> lista = new ArrayList<>();
-        Statement st = DAOMySQLSettings.getStatement();
-        String sql="";
+        try {
+            Statement st = DAOMySQLSettings.getStatement();
+            String sql = "";
 
-        if(a.isAlcolico()==0) {
-            sql = "SELECT * FROM prodotto";
+            if (a.isAlcolico() == 0) {
+                sql = "SELECT * FROM prodotto";
+            } else {
+                sql = "SELECT * FROM prodotto where alcolico=0";
+            }
+
+            logger.info("SQL:" + sql);
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                lista.add(new Prodotto(rs.getInt("id_prodotto"),
+                        rs.getString("nome_prodotto"),
+                        rs.getString("tipo_prodotto"),
+                        rs.getInt("alcolico"),
+                        rs.getFloat("prezzo_prodotto"),
+                        rs.getInt("quantita_prodotto")));
+
+            }
+            DAOMySQLSettings.closeStatement(st);
         }
-        else
-        {
-            sql="SELECT * FROM prodotto where alcolico=0";
+        catch(SQLException sq){
+            throw new DAOException("Errore select(): "+ sq.getMessage());
         }
-
-        logger.info("SQL:"+ sql);
-        ResultSet rs=st.executeQuery(sql);
-
-        while(rs.next()){
-            lista.add(new Prodotto(rs.getInt("id_prodotto"),
-                    rs.getString("nome_prodotto"),
-                    rs.getString("tipo_prodotto"),
-                    rs.getInt("alcolico"),
-                    rs.getFloat("prezzo_prodotto"),
-                    rs.getInt("quantita_prodotto")));
-
-        }
-        DAOMySQLSettings.closeStatement(st);
-
         return lista;
-
     }
 
     @Override
@@ -90,25 +88,28 @@ public class ProdottoDAOMySQLImpl implements DAO<Prodotto> {
     }
 
     @Override
-    public void delete(Prodotto a) throws DAOException, SQLException {
+    public void delete(Prodotto a) throws DAOException {
 
-        Statement st = DAOMySQLSettings.getStatement();
-        String sql = "DELETE FROM Prodotto WHERE id_prodotto = '"+ a.getId_prodotto() +"'and nome_prodotto = '"+a.getNome_prodotto() +
-                     "'and tipo_prodotto = '" + a.getTipo_prodotto() + "' and alcolico = '" + a.isAlcolico() + "'and prezzo_prodotto = '" + a.getPrezzo_prodotto()+
-                     "'and quantita_prodotto = '" + a.getQuantita_prodotto() + "'";
+        try {
 
-        int n = st.executeUpdate(sql);
+            Statement st = DAOMySQLSettings.getStatement();
+            String sql = "DELETE FROM Prodotto WHERE id_prodotto = '"+ a.getId_prodotto() +"'and nome_prodotto = '"+a.getNome_prodotto() +
+                    "'and tipo_prodotto = '" + a.getTipo_prodotto() + "' and alcolico = '" + a.isAlcolico() + "'and prezzo_prodotto = '" + a.getPrezzo_prodotto()+
+                    "'and quantita_prodotto = '" + a.getQuantita_prodotto() + "'";
 
-        System.out.println(sql);
-        logger.info("SQL" + sql);
-        DAOMySQLSettings.closeStatement(st);
+            int n = st.executeUpdate(sql);
 
+            System.out.println(sql);
+            logger.info("SQL" + sql);
+            DAOMySQLSettings.closeStatement(st);
 
-
+        }catch(SQLException sq){
+           throw new DAOException("Errore Delete(): "+sq.getMessage());
+        }
     }
 
     @Override
-    public List<Prodotto> join(Prodotto a) throws DAOException, SQLException {
+    public List<Prodotto> join(Prodotto a) throws DAOException {
         return null;
     }
 
