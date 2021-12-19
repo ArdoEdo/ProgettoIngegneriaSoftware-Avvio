@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.CassaOverviewController">
+<AnchorPane prefHeight="500.0" prefWidth="720.0" style="-fx-background-color: #2d2e33#2d2e33;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.CassaOverviewController">
     <children>
         <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
@@ -35,8 +35,8 @@
                     <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
-                        <MFXLegacyComboBox fx:id="locazioneComboBox" layoutX="7.0" layoutY="16.0" lineColor="#ffa435" onAction="#locazioneSelected" prefHeight="24.0" prefWidth="150.0" promptText="Locazione" />
-                        <MFXTextField fx:id="inserisciTavolo" layoutX="10.0" layoutY="68.0" lineColor="#ffa435" />
+                        <MFXLegacyComboBox fx:id="locazioneComboBox" layoutX="7.0" layoutY="16.0" lineColor="#ffa435" lineStrokeWidth="0.0" onAction="#locazioneSelected" prefHeight="24.0" prefWidth="150.0" promptText="Locazione" style="-fx-background-color: #ffa435#ffa435;" />
+                        <MFXTextField fx:id="inserisciTavolo" alignment="CENTER" layoutX="10.0" layoutY="68.0" lineColor="#ffa435" lineStrokeWidth="0.0" promptText="Inserire numero Tavolo" unfocusedLineColor="#ffa435" />
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -51,26 +51,29 @@
          <bottom>
             <AnchorPane prefHeight="40.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="469.0" layoutY="7.0" prefHeight="40.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <MFXButton fx:id="pagamentoButton" alignment="CENTER" buttonType="RAISED" layoutX="594.0" layoutY="6.0" onAction="#pagamentoButtonPressed" prefHeight="26.0" prefWidth="125.0" text="Pagamento">
+                  <Pane layoutX="469.0" layoutY="7.0" prefHeight="40.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <FontAwesomeIconView glyphName="EURO" layoutX="388.0" layoutY="26.0" size="22" />
+                     </children></Pane>
+                  <MFXButton fx:id="pagamentoButton" alignment="CENTER" buttonType="RAISED" layoutX="546.0" layoutY="5.0" onAction="#pagamentoButtonPressed" prefHeight="29.0" prefWidth="123.0" text="Pagamento">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </MFXButton>
-                  <FontAwesomeIconView glyphName="EURO" layoutX="434.0" layoutY="26.0" size="22" />
-                  <MFXTextField fx:id="totaleTextField" alignment="CENTER" animateLines="false" editable="false" layoutX="434.0" layoutY="4.0" lineColor="#ffa435" promptText="Prezzo" unfocusedLineColor="#ffa435" />
+                  <MFXTextField fx:id="totaleTextField" alignment="CENTER" animateLines="false" editable="false" layoutX="389.0" layoutY="7.0" lineColor="#ffa435" lineStrokeWidth="0.0" promptText="Prezzo" unfocusedLineColor="#ffa435" />
+                  <FontAwesomeIconView glyphName="EURO" layoutX="392.0" layoutY="27.0" size="20" />
                </children>
             </AnchorPane>
          </bottom>
          <top>
             <Pane prefHeight="92.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXLabel layoutX="94.0" layoutY="57.0" lineStrokeWidth="0.0" text="Cassa">
+                  <MFXLabel layoutX="6.0" layoutY="54.0" lineStrokeWidth="0.0" text="Cassa">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="34.0" />
                      </font>
                      <textFill>
-                        <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
+                        <Color red="1.0" green="0.6431372761726379" blue="0.2078431397676468" />
                      </textFill>
                   </MFXLabel>
                </children>

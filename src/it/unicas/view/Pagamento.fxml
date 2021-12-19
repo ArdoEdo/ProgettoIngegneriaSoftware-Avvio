@@ -12,21 +12,21 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.PagamentoOverviewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.PagamentoOverviewController">
    <children>
       <Pane prefHeight="67.0" prefWidth="720.0" style="-fx-background-color: #2d2e34#2d2e34;">
          <children>
-            <MFXLabel layoutX="287.0" layoutY="16.0" lineColor="#eb9600" lineStrokeWidth="3.0" prefHeight="46.0" prefWidth="142.0" text="Pagamento">
+            <MFXLabel animateLines="false" layoutX="287.0" layoutY="16.0" lineColor="#eb9600" lineStrokeWidth="0.0" prefHeight="46.0" prefWidth="142.0" text="Pagamento">
                <font>
                   <Font size="24.0" />
                </font>
                <textFill>
-                  <Color red="1.0" green="1.0" blue="1.0" />
+                  <Color red="1.0" green="0.6431372761726379" blue="0.2078431397676468" />
                </textFill>
             </MFXLabel>
          </children>
       </Pane>
-      <MFXButton alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="551.0" layoutY="322.0" onAction="#pagamentoCartaPressed" prefHeight="46.0" prefWidth="155.0" text="Paga con carta">
+      <MFXButton alignment="CENTER" graphicTextGap="10.0" layoutX="551.0" layoutY="322.0" onAction="#pagamentoCartaPressed" prefHeight="46.0" prefWidth="155.0" text="Paga con carta">
          <graphic>
             <FontAwesomeIconView glyphName="PAYPAL" size="25">
                <font>
@@ -35,7 +35,7 @@
             </FontAwesomeIconView>
          </graphic>
       </MFXButton>
-      <MFXButton alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="385.0" layoutY="322.0" onAction="#pagamentoContantiPressed" prefHeight="46.0" prefWidth="145.0" text="Paga in contanti">
+      <MFXButton alignment="CENTER" graphicTextGap="10.0" layoutX="385.0" layoutY="322.0" onAction="#pagamentoContantiPressed" prefHeight="46.0" prefWidth="145.0" text="Paga in contanti">
          <graphic>
             <FontAwesomeIconView glyphName="MONEY" size="25">
                <font>
@@ -67,7 +67,7 @@
             <Font size="18.0" />
          </font>
       </MFXLabel>
-      <MFXTextField fx:id="totaleTextField" alignment="CENTER" editable="false" layoutX="457.0" layoutY="275.0" lineStrokeWidth="3.0" promptText="Totale da pagare" unfocusedLineColor="#eb9600">
+      <MFXTextField fx:id="totaleTextField" alignment="CENTER" animateLines="false" editable="false" layoutX="457.0" layoutY="275.0" lineStrokeWidth="0.0" promptText="Totale da pagare" unfocusedLineColor="#eb9600">
          <font>
             <Font size="18.0" />
          </font>

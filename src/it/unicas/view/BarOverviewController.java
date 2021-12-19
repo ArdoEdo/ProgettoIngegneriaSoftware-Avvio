@@ -86,13 +86,6 @@ public class BarOverviewController {
                 e.printStackTrace();
             }
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Ordine Prearato");
-            alert.setHeaderText("L'ordine è stato preparato.");
-            alert.setContentText("Preparare l'ordine successivo");
-            alert.showAndWait();
-
             barTableView.getItems().remove(selected_index);
 
         }

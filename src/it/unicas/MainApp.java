@@ -26,8 +26,9 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
 
     /**
-     * Lista osservabile di Prodotti
+     * Liste osservabili sfruttate dalle TableView
      */
+
     private ObservableList<Prodotto> prodottoData= FXCollections.observableArrayList();
     private ObservableList<Tavolo> tavoloData= FXCollections.observableArrayList();
     private ObservableList<Ordine> ordineData = FXCollections.observableArrayList();
@@ -79,22 +80,22 @@ public class MainApp extends Application {
     public void initRootLayout()  {
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/MyDash.fxml"));
-            rootLayout=(BorderPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("view/MyDash.fxml")); //setto locazione fxml fornendo il path
+            rootLayout=(BorderPane) loader.load(); //carico fxml
 
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
+            Scene scene = new Scene(rootLayout); //istanzio la scena con rootLayout
+            primaryStage.setScene(scene); //set della scena nel primary stage
 
-            primaryStage.setOnCloseRequest(event -> {
+            primaryStage.setOnCloseRequest(event -> { //gestisco chiusura finestra
                 event.consume();
                 handleExit();
             });
 
             // Give the controller access to the main app.
-            RootLayoutController controller = loader.getController();
-            controller.setMainApp(this);
-            System.out.println(this.toString());
-        }catch(IOException e) {
+            RootLayoutController controller = loader.getController(); //carico il controller dall fxml
+            controller.setMainApp(this); //setto riferimento alla mainApp
+
+        }catch(IOException e) { //gestisco eccezione
             e.printStackTrace();
         }
     }
@@ -102,12 +103,12 @@ public class MainApp extends Application {
     public void handleExit() {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Are you sure?");
-        alert.setHeaderText("Exit");
-        alert.setContentText("Exit from application.");
+        alert.setTitle("Sei sicuro?");
+        alert.setHeaderText("Esci");
+        alert.setContentText("Esci dall'applicazione");
 
-        ButtonType buttonTypeOne = new ButtonType("Yes");
-        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeOne = new ButtonType("Si");
+        ButtonType buttonTypeCancel = new ButtonType("Cancella", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
 
@@ -211,7 +212,7 @@ public class MainApp extends Application {
     public void showAdminOverview2() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/AdminOverview2Test.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/AdminOverview2.fxml"));
             rootLayout.setCenter( loader.load());
 
             // Get controller and set the mainapp reference.

@@ -18,11 +18,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.OrdineOverviewController">
+<AnchorPane prefHeight="500.0" prefWidth="720.0" style="-fx-background-color: #2d2e33#2d2e33 #2d2e33#2d2e33;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.OrdineOverviewController">
     <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <SplitPane dividerPositions="0.35724233983286907" stylesheets="@style.css">
+            <SplitPane dividerPositions="0.35724233983286907" style="-fx-background-color: #2d2e33#2d2e33 #2d2e33#2d2e33;" stylesheets="@style.css">
                <items>
                   <AnchorPane>
                      <children>
@@ -37,16 +37,19 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <BorderPane.margin>
-                                    <Insets bottom="12.0" />
+                                    <Insets left="22.0" top="10.0" />
                                  </BorderPane.margin>
                               </MFXLegacyTableView>
                            </center>
                            <bottom>
-                              <MFXButton fx:id="caricaButton" buttonType="RAISED" onAction="#caricaMenu" text="Carica Menu" BorderPane.alignment="CENTER">
+                              <Pane prefHeight="36.0" prefWidth="256.0" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
                                     <Insets bottom="3.0" />
                                  </BorderPane.margin>
-                              </MFXButton>
+                                 <children>
+                                    <MFXButton fx:id="caricaButton" buttonType="RAISED" layoutX="92.0" layoutY="5.0" onAction="#caricaMenu" text="Carica Menu" />
+                                 </children>
+                              </Pane>
                            </bottom>
                               </BorderPane>
                      </children>
@@ -97,16 +100,16 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <BorderPane.margin>
-                                    <Insets />
+                                    <Insets left="1.0" right="50.0" top="10.0" />
                                  </BorderPane.margin>
                               </MFXLegacyTableView>
                            </center>
                            <bottom>
                               <Pane prefHeight="40.0" prefWidth="314.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <MFXLegacyComboBox fx:id="comboBoxLocazione" layoutX="98.0" layoutY="7.0" lineColor="#ffa435" onAction="#locazioneSelected" promptText="Locazione" />
-                                    <MFXLegacyComboBox fx:id="comboBoxTavolo" disable="true" layoutX="208.0" layoutY="7.0" lineColor="#ffa435" onAction="#tavoloSelected" promptText="N° Tavolo" />
-                                    <MFXButton fx:id="ordinaButton" buttonType="RAISED" disable="true" layoutX="311.0" layoutY="7.0" onAction="#inviaOrdine" prefHeight="26.0" prefWidth="80.0" text="Ordina" />
+                                    <MFXLegacyComboBox fx:id="comboBoxLocazione" layoutX="84.0" layoutY="6.0" lineColor="#ffa435" lineStrokeWidth="0.0" onAction="#locazioneSelected" prefHeight="24.0" prefWidth="89.0" promptText="Locazione" style="-fx-background-color: #ffa435#ffa435;" stylesheets="@style.css" />
+                                    <MFXLegacyComboBox fx:id="comboBoxTavolo" disable="true" layoutX="208.0" layoutY="7.0" lineColor="#ffa435" lineStrokeWidth="0.0" onAction="#tavoloSelected" prefHeight="24.0" prefWidth="86.0" promptText="N° Tavolo" style="-fx-background-color: #ffa435#ffa435;" />
+                                    <MFXButton fx:id="ordinaButton" buttonType="RAISED" disable="true" layoutX="330.0" layoutY="6.0" onAction="#inviaOrdine" prefHeight="26.0" prefWidth="80.0" text="Ordina" />
                                  </children>
                               </Pane>
                            </bottom>
@@ -119,12 +122,12 @@
          <top>
             <Pane prefHeight="92.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXLabel layoutX="-1.0" layoutY="58.0" lineColor="#ffa435" lineStrokeWidth="0.0" text="Ordine">
+                  <MFXLabel layoutX="6.0" layoutY="54.0" lineColor="#ffa435" lineStrokeWidth="0.0" stylesheets="@style.css" text="Ordine">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="Verdana" size="34.0" />
                      </font>
                      <textFill>
-                        <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
+                        <Color red="1.0" green="0.6431372761726379" blue="0.2078431397676468" />
                      </textFill>
                   </MFXLabel>
                </children></Pane>

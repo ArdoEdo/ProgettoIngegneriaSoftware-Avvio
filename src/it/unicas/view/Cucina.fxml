@@ -12,25 +12,25 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ancorpaneAdmin" prefHeight="500.0" prefWidth="720.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.CucinaOverviewController">
+<AnchorPane fx:id="ancorpaneAdmin" prefHeight="500.0" prefWidth="720.0" style="-fx-background-color: #2d2e33#2d2e33;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.CucinaOverviewController">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
             <Pane prefHeight="92.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXLabel alignment="BOTTOM_RIGHT" layoutY="64.0" lineStrokeWidth="4.0" prefHeight="29.0" prefWidth="189.0" text="Cucina">
+                  <MFXLabel layoutX="6.0" layoutY="54.0" lineStrokeWidth="0.0" text="Cucina">
                      <textFill>
-                        <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
+                        <Color red="1.0" green="0.6431372761726379" blue="0.2078431397676468" />
                      </textFill>
                      <font>
-                        <Font size="24.0" />
+                        <Font size="34.0" />
                      </font>
                   </MFXLabel>
                </children>
             </Pane>
             </top>
          <center>
-            <MFXLegacyTableView fx:id="cucinaTableView" BorderPane.alignment="CENTER">
+            <MFXLegacyTableView fx:id="cucinaTableView" prefHeight="349.0" prefWidth="648.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="Nome" />
                   <TableColumn fx:id="quantitaColumn" prefWidth="75.0" text="Quantità" />
@@ -44,12 +44,12 @@
                   <Insets />
                </opaqueInsets>
                <BorderPane.margin>
-                  <Insets right="50.0" top="10.0" />
+                  <Insets left="22.0" right="50.0" top="10.0" />
                </BorderPane.margin>
             </MFXLegacyTableView>
          </center>
          <bottom>
-            <Pane prefHeight="42.0" prefWidth="720.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="40.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                <children>
                   <MFXButton fx:id="preparatoButton" buttonType="RAISED" disable="true" layoutX="594.0" layoutY="6.0" onAction="#preparatoButtonPressed" text="Preparato">
                      <font>

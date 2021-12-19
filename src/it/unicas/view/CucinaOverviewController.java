@@ -86,14 +86,7 @@ public class CucinaOverviewController {
             } catch (DAOException e) {
                 e.printStackTrace();
             }
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Ordine preparato!");
-            alert.setHeaderText("L'ordine è stato preparato.");
-            alert.setContentText("Preparare l'ordine successivo");
-
-            alert.showAndWait();
+            
             cucinaTableView.getItems().remove(selected_index);
 
         }else{

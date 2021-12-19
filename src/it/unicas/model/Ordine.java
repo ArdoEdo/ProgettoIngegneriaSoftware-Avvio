@@ -12,8 +12,7 @@ public class Ordine {
     private IntegerProperty ordine_preparato;
     private IntegerProperty quantita_prodotto_or;
 
-
-
+    
     public Ordine(){}
 
     /**

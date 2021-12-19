@@ -8,18 +8,9 @@ import it.unicas.model.dao.DAOException;
 import it.unicas.model.dao.mysql.OrdineDAOMySQLImpl;
 import it.unicas.model.dao.mysql.ProdottoDAOMySQLImpl;
 import it.unicas.model.dao.mysql.TavoloDAOMySQLImpl;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Duration;
-
-import java.sql.SQLException;
-import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 
 public class OrdineOverviewController {
@@ -65,17 +56,15 @@ public OrdineOverviewController(){
         ordineTableView.setPlaceholder(new Label("Caricare il menu"));
         riepilogoOrdine.setPlaceholder(new Label("I prodotti aggiunti verranno visualizzati qui"));
 
-        //inizializzo la tabella ordineTableView con la colonna nomecolumn
-        nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nome_prodottoProperty());
+        //inizializzo colonne tabella ordineTableView e riepilogoOrdine
+        nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nome_prodottoProperty()); //la singola cella della colonna nomeColumn è settata sulla property nome
         dxNomeColumn.setCellValueFactory(cellData -> cellData.getValue().nome_prodottoProperty());
         prezzoColumn.setCellValueFactory(cellData -> cellData.getValue().prezzo_prodottoProperty().asObject());
         quantitaColumn.setCellValueFactory(cellData->cellData.getValue().quantita_prodottoProperty().asObject());
 
-
-
     }
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(MainApp mainApp) { //metodo necessario in tutti i controller che interagiscono con la mainapp
 
         this.mainApp = mainApp;
 
@@ -85,7 +74,7 @@ public OrdineOverviewController(){
 
         //inizializzo il comboBox menu
         comboBoxLocazione.getItems().clear();
-        mainApp.checkRestriction();
+        mainApp.checkRestriction(); //verifica delle restrizioni
         if(mainApp.getModalitaEstiva()==1)
             comboBoxLocazione.getItems().addAll("Bancone","Interno","Esterno");
         else
@@ -96,16 +85,13 @@ public OrdineOverviewController(){
 private void caricaMenu() {
 
     Prodotto tempProdotto = new Prodotto(null, "", "", 0, .0f,1);
-    //(Integer id_prodotto,String nome_prodotto, String tipo_prodotto,Integer alcolico, Float prezzo_prodotto, Integer quantita_prodotto)
-    mainApp.checkRestriction();
-    tempProdotto.setAlcolico(mainApp.getModalitaRestrizioni());
-    caricaButton.setDisable(true);
-    List<Prodotto> list = null;
+    mainApp.checkRestriction(); //tale verifica permette di aggiornare il menu qualora cambi l orario
+    tempProdotto.setAlcolico(mainApp.getModalitaRestrizioni()); //ottengo da modalitaRestrizioni il valore per eseguire la query corretta (0 ALL)
+    List<Prodotto> list = null; //instanzio lista per contenere i risultati della query
     try {
-        System.out.println(mainApp);
         list = ProdottoDAOMySQLImpl.getInstance().select(tempProdotto);
         mainApp.getProdottoData().clear();
-        mainApp.getProdottoData().addAll(list);
+        mainApp.getProdottoData().addAll(list); //aggiungo all'observableList i Prodotti
 
     } catch (DAOException e) {
         e.printStackTrace();
@@ -115,18 +101,17 @@ private void caricaMenu() {
     private void aggiungiButtonPressed() {
 
 
-        int selected_index = ordineTableView.getSelectionModel().getSelectedIndex();
+        int selected_index = ordineTableView.getSelectionModel().getSelectedIndex(); //ottengo indice istanza selezionata TableView
 
 
         //se selezioni un item effettua l'aggiunta
         if(selected_index!=-1) {
             riepilogoOrdine.getItems().add(ordineTableView.getItems().get(selected_index));
 
-            if(riepilogoOrdine.getItems().size()>0 && comboBoxTavolo.getValue()!=null)
+            if(riepilogoOrdine.getItems().size()>0 && comboBoxTavolo.getValue()!=null) //per abilitare il bottone ordina verifica che siano valorizzati il comboBox e ci sia almeno un ordine
                 ordinaButton.setDisable(false);
 
             int sizeRiepilogoOrdine = riepilogoOrdine.getItems().size();
-            System.out.println(riepilogoOrdine.getItems().get(sizeRiepilogoOrdine - 1).getNome_prodotto());
 
             for( int i=0;i<sizeRiepilogoOrdine;++i)  {
                 if (sizeRiepilogoOrdine > 1 && i!=sizeRiepilogoOrdine-1){
@@ -168,8 +153,6 @@ private void caricaMenu() {
             list = TavoloDAOMySQLImpl.getInstance().select(tavolo);
             mainApp.getTavoloData().clear();
             mainApp.getTavoloData().addAll(list);
-            System.out.println(comboBoxLocazione.getValue().toString());
-            System.out.println(list);
             comboBoxTavolo.getItems().clear();
             for( int i = 0; i<list.size(); i++) {
                 comboBoxTavolo.getItems().add(list.get(i).getNumero_tavolo());
@@ -180,15 +163,13 @@ private void caricaMenu() {
         }
 
         comboBoxTavolo.setDisable(false);
-
+        ordinaButton.setDisable(true); //gestisce utente che cambia la locazione una volta selezionato il tavolo
     }
 
     @FXML
-    private void tavoloSelected(){
-
+    private void tavoloSelected(){ //è stato scelto il numero tavolo dal combobox
     if (riepilogoOrdine.getItems().size()>0)
     ordinaButton.setDisable(false);
-
 
 }
 
@@ -197,20 +178,18 @@ private void caricaMenu() {
 
         Ordine tempListOrdine = new Ordine();
         for (int i = 0; i < riepilogoOrdine.getItems().size(); i++) {
-                System.out.println(Integer.parseInt(comboBoxTavolo.getValue().toString()));
+
                 tempListOrdine.setTavolo_numero_tavolo(Integer.parseInt(comboBoxTavolo.getValue().toString()));
                 tempListOrdine.setTavolo_locazione_tavolo(comboBoxLocazione.getValue().toString());
 
                 for(int j = 0; j<mainApp.getProdottoData().size();j++){
                     if(mainApp.getProdottoData().get(j).getNome_prodotto() == riepilogoOrdine.getItems().get(i).getNome_prodotto()) {
                         tempListOrdine.setProdotto_id_prodotto(mainApp.getProdottoData().get(j).getId_prodotto());
-                        System.out.println(mainApp.getProdottoData().get(j).getNome_prodotto());
                         break;
                     }
                 }
                 tempListOrdine.setQuantita_prodotto_or(riepilogoOrdine.getItems().get(i).getQuantita_prodotto());
                 tempListOrdine.setOrdine_preparato(0);
-                System.out.println(tempListOrdine);
 
             try {
                 OrdineDAOMySQLImpl.getInstance().insert(tempListOrdine);
@@ -219,7 +198,7 @@ private void caricaMenu() {
             }
             mainApp.getOrdineData().add(tempListOrdine);
 
-            riepilogoOrdine.getItems().get(i).setQuantita_prodotto(1);
+            riepilogoOrdine.getItems().get(i).setQuantita_prodotto(1); //reset valore quantità
 
         }
         riepilogoOrdine.getItems().clear();

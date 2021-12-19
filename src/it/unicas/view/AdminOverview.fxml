@@ -9,19 +9,22 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.AdminOverviewController">
+<BorderPane prefHeight="500.0" prefWidth="720.0" style="-fx-background-color: #2d2e33#2d2e33;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.view.AdminOverviewController">
    <center>
       <AnchorPane prefHeight="344.0" prefWidth="524.0">
          <children>
             <TextField fx:id="UserName" layoutX="159.0" layoutY="145.0" prefHeight="49.0" prefWidth="206.0" promptText="Username" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="159.0" />
-            <Button fx:id="Login" layoutX="216.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="48.0" prefWidth="92.0" text="Login" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="216.0" />
-            <PasswordField fx:id="PassWord" layoutX="159.0" layoutY="238.0" prefHeight="49.0" prefWidth="197.0" promptText="Password" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="159.0" />
-            <MFXLabel layoutX="-1.0" layoutY="58.0" lineStrokeWidth="0.0" text="Admin">
+            <Button fx:id="Login" layoutX="216.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="48.0" prefWidth="92.0" text="Login" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="216.0">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Comfortaa SemiBold" size="18.0" />
+               </font></Button>
+            <PasswordField fx:id="PassWord" layoutX="159.0" layoutY="238.0" prefHeight="49.0" prefWidth="197.0" promptText="Password" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="159.0" />
+            <MFXLabel layoutX="6.0" layoutY="54.0" lineStrokeWidth="0.0" text="Admin">
+               <font>
+                  <Font name="Comfortaa SemiBold" size="34.0" />
                </font>
                <textFill>
-                  <Color red="0.1725490242242813" green="0.16862745583057404" blue="0.16862745583057404" />
+                  <Color red="1.0" green="0.6431372761726379" blue="0.2078431397676468" />
                </textFill>
             </MFXLabel>
          </children>

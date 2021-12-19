@@ -98,6 +98,7 @@ public class AdminOverviewController2 {
 
         String LocTav = comboBoxLocazione.getValue().toString();
         Integer Spin = spinnerTavolo.getValue(); //numero tavoli da eliminare
+        Integer num_Exc= 0;
 
         Tavolo tempTavolo = new Tavolo(Spin, null, LocTav);
 
@@ -106,19 +107,29 @@ public class AdminOverviewController2 {
                 TavoloDAOMySQLImpl.getInstance().delete(tempTavolo);
 
             } catch (DAOException e) {
-                Alert mes1 = new Alert(Alert.AlertType.ERROR);
+                num_Exc++;
+                /*Alert mes1 = new Alert(Alert.AlertType.ERROR);
                 mes1.setTitle("Errore");
                 mes1.setHeaderText("Eliminazione tavolo fallita");
                 mes1.setContentText("Errore! Ordini in corso per il tavolo da eliminare");
-                mes1.show();
+                mes1.show();*/
                 e.printStackTrace();
             }
         }
-        Alert mes1 = new Alert(Alert.AlertType.INFORMATION);
-        mes1.setContentText("Numero tavoli rimossi: "+ Spin);
-        mes1.setTitle("Successo");
-        mes1.setHeaderText("Operazione completata");
-        mes1.show();
+   if (num_Exc>0) {
+       Alert mes1 = new Alert(Alert.AlertType.WARNING);
+       mes1.setContentText("Errore! Ordini in corso per il tavolo da eliminare");
+       mes1.setTitle("Errore");
+       mes1.setHeaderText("Eliminazione tavolo fallita");
+       mes1.show();
+   }
+   else{
+       Alert mes1 = new Alert(Alert.AlertType.INFORMATION);
+       mes1.setContentText("Numero tavoli rimossi: " + Spin);
+       mes1.setTitle("Successo");
+       mes1.setHeaderText("Operazione completata");
+       mes1.show();
+   }
 
     }
 
@@ -126,8 +137,6 @@ public class AdminOverviewController2 {
     private void rimuoviButtonMenu() {
 
         int selected_index = prodottiTableView.getSelectionModel().getSelectedIndex();
-        System.out.println(selected_index);
-        System.out.println(mainApp.getProdottoData().get(selected_index).getNome_prodotto());
 
         Prodotto tempProdotto = new Prodotto();
         if (selected_index != -1) {
@@ -141,17 +150,29 @@ public class AdminOverviewController2 {
             System.out.println(tempProdotto);
             try {
                 ProdottoDAOMySQLImpl.getInstance().delete(tempProdotto);
+                Alert mes = new Alert(Alert.AlertType.INFORMATION);
+                mes.setHeaderText("Rimozione prodotto effettuata");
+                mes.setContentText("Premere 'Carica' per aggiornare la lista");
+                mes.setTitle("Successo");
+                mes.show();
             } catch (DAOException e) {
                 Alert mes1 = new Alert(Alert.AlertType.ERROR);
                 mes1.setTitle("Errore");
                 mes1.setHeaderText("Eliminazione prodotto fallita");
-                mes1.setContentText("Errore! Ordini in corso per il prodotto da eliminare");
-
+                mes1.setContentText("Errore! Ordini in corso per il prodotto: "+mainApp.getProdottoData().get(selected_index).getNome_prodotto()+" tipologia: " +
+                        ""+mainApp.getProdottoData().get(selected_index).getTipo_prodotto());
                 mes1.show();
+                e.printStackTrace();
             }
         }
-        if (prodottiTableView.getItems().size() == 0)
-            rimuovi_prod.setDisable(true);
+        else
+        {
+            Alert mes1 = new Alert(Alert.AlertType.ERROR);
+            mes1.setTitle("Errore");
+            mes1.setHeaderText("Eliminazione prodotto fallita");
+            mes1.setContentText("Errore! Selezionare un prodotto da eliminare");
+            mes1.show();
+        }
 
     }
 
@@ -173,27 +194,26 @@ public class AdminOverviewController2 {
         String prezzoProd = prezzo.getText();
         // Integer Alcool = alcolico.isSelected();
 
-        Prodotto tempProdotto = new Prodotto(null, nomeProd, tipoProd, 1, Float.parseFloat(prezzoProd), 1);
-        System.out.println(tempProdotto);
         if (nomeProd.length() != 0 && tipoProd.length() != 0 && prezzoProd.length() != 0) {
+            Prodotto tempProdotto = new Prodotto(null, nomeProd, tipoProd, 1, Float.parseFloat(prezzoProd), 1);
+            System.out.println(tempProdotto);
 
-            mes.setContentText("Premere 'Carica' per aggiornare la lista");
-            mes.setTitle("Inserimento prodotto effettuato");
-            mes.show();
             try {
                 ProdottoDAOMySQLImpl.getInstance().insert(tempProdotto);
 
             } catch (DAOException e) {
                 e.printStackTrace();
             }
+            mes.setHeaderText("Inserimento prodotto effettuato");
+            mes.setContentText("Premere 'Carica' per aggiornare la lista");
+            mes.setTitle("Successo");
+            mes.show();
         } else {
+            mes.setHeaderText("Inserimento prodotto fallito");
             mes.setContentText("Completare tutti i campi di 'Aggiungi prodotto'!");
             mes.setTitle("Errore");
             mes.show();
-
         }
-
-
     }
 
 
@@ -210,5 +230,7 @@ public class AdminOverviewController2 {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+        if (prodottiTableView.getItems().size() != 0)
+            rimuovi_prod.setDisable(false);
     }
 }
